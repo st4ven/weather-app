@@ -10,8 +10,10 @@ const currImage = document.querySelector(".icon");
 const conditions = document.querySelector(".condition");
 const footer = document.querySelector(".footer");
 
+// default city data: New York
 getWeather("New York");
 
+// gets the weather data using the API with the user inputted city
 async function getWeather(city) {
     try {
         const response = await fetch(link + city + "?key=" + key);
@@ -30,6 +32,8 @@ async function getWeather(city) {
     }
 }
 
+// handles the search button:
+// if the input field is left blank, error message will be displayed
 function searching() {
     const cityData = cityInput.value;
 
@@ -42,6 +46,7 @@ function searching() {
     }
 }
 
+// changes the image to the corresponding weather status
 function changeImage(condition) {
     if (condition == 'rain') {
         currImage.src = "images/rain.png";
@@ -64,4 +69,11 @@ function changeImage(condition) {
     }
 }
 
+document.addEventListener("keydown", (e) => {
+    if (e.key == 'Enter') {
+        searching();
+    }
+});
+
+// handles the search button on click
 searchButton.addEventListener('click', searching);
